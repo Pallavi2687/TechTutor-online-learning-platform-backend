@@ -14,7 +14,8 @@ MEDIA_ROOT = BASE_DIR / "media"
 # ───────────────
 SECRET_KEY = os.environ.get("SECRET_KEY", "unsafe-default-key")
 DEBUG = os.environ.get("DEBUG", "False") == "True"
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost").split(",")
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
+
 
 # ───────────────
 # Installed Apps
@@ -110,7 +111,13 @@ SIMPLE_JWT = {
 # ───────────────
 # CORS Configuration
 # ───────────────
-CORS_ALLOW_ALL_ORIGINS = True  # For dev only; tighten in prod
+CORS_ALLOW_ALL_ORIGINS = False
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",           # ✅ React dev frontend
+    "https://your-frontend.vercel.app" # ✅ Deployed frontend (optional)
+]
+
 
 # ───────────────
 # REST Framework
