@@ -3,11 +3,12 @@ from django.db import models
 # Create your models here.
 
 from accounts.models import CustomUser
+from cloudinary.models import CloudinaryField
 
 class Course(models.Model):
     title       = models.CharField(max_length=200)
     description = models.TextField()
-    thumbnail   = models.ImageField(upload_to="thumbnails/", blank=True, null=True)
+    thumbnail   = CloudinaryField('thumbnail', blank=True, null=True)
     instructor  = models.ForeignKey(
         CustomUser,
         on_delete=models.CASCADE,

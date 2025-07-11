@@ -29,3 +29,7 @@ sqlparse==0.5.3
 tablib==3.8.0
 tzdata==2025.1
 virtualenv==20.29.2
+
+# ✅ Add these 2 lines for Cloudinary support:
+cloudinary==1.40.0
+django-cloudinary-storage==0.3.0
