@@ -8,7 +8,11 @@ from datetime import timedelta
 BASE_DIR = Path(__file__).resolve().parent.parent
 # MEDIA_URL = "/media/"
 # MEDIA_ROOT = BASE_DIR / "media"
-
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Where collected static files will be stored
+STATICFILES_DIRS = [
+    BASE_DIR / "static",  # Optional: Additional static file directories
+]
 # ───────────────
 # Environment Variables
 # ───────────────
@@ -20,7 +24,8 @@ ALLOWED_HOSTS = [
     "techtutor-online-learning-platform-bx44.onrender.com"
 ]
 
-
+if not DEBUG:
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # ───────────────
 # Installed Apps
 # ───────────────
