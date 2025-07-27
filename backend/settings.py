@@ -9,10 +9,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # MEDIA_URL = "/media/"
 # MEDIA_ROOT = BASE_DIR / "media"
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # Where collected static files will be stored
-STATICFILES_DIRS = [
-    BASE_DIR / "static",  # Optional: Additional static file directories
-]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # Where collected static files will be stored
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",  # Optional: Additional static file directories
+# ]
 # ───────────────
 # Environment Variables
 # ───────────────
@@ -23,6 +23,8 @@ ALLOWED_HOSTS = [
     "127.0.0.1", 
     "techtutor-online-learning-platform-bx44.onrender.com"
 ]
+
+DEBUG = True
 
 if not DEBUG:
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -55,6 +57,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -146,7 +149,7 @@ REST_FRAMEWORK = {
 # ───────────────
 # Static & Media
 # ───────────────
-STATIC_URL = "static/"
+# STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # ───────────────
@@ -155,8 +158,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "accounts.CustomUser"
 # Media files with Cloudinary
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
-    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
-    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
-}
+import cloudinary
+
+cloudinary.config(
+    cloud_name="dsgdobp5f",
+    api_key="319225148821162",
+    api_secret="O0UNFetsamj60OzPBYuYuXwYXZ0"
+)
